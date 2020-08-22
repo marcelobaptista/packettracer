@@ -2,16 +2,16 @@
 #
 #Baixando e desempacotando o arquivo .deb
 #
-echo "Downloading: PacketTracer_730_amd64.deb..." && curl --progress-bar --remote-name --location "http://cs3.calstatela.edu/~egean/cs4471/software/Cisco%20Packet%20Tracer%207.3.0/PacketTracer_730_amd64.deb"
+echo "Downloading: PacketTracer_730_amd64.deb..." && curl --progress-bar --remote-name --location "http://cs3.calstatela.edu/~egean/cs4471/software/Cisco%20Packet%20Tracer%207.3.1/PacketTracer_731_amd64.deb"
 DIR="/tmp/PacketTracer/"
 if [ -d "$DIR" ]; then
 	rm -rf "$DIR"
 else
 	mkdir /tmp/PacketTracer/
 fi
-cp PacketTracer_730_amd64.deb /tmp/PacketTracer/
+cp PacketTracer_731_amd64.deb /tmp/PacketTracer/
 cd /tmp/PacketTracer/
-ar -xv PacketTracer_730_amd64.deb
+ar -xv PacketTracer_731_amd64.deb
 mkdir control
 tar -C control -Jxf control.tar.xz
 mkdir data
