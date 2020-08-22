@@ -2,6 +2,7 @@
 #
 #Baixando e desempacotando o arquivo .deb
 #
+echo ""
 echo "Downloading: PacketTracer_731_amd64.deb..." && curl --progress-bar --remote-name --location "http://cs3.calstatela.edu/~egean/cs4471/software/Cisco%20Packet%20Tracer%207.3.1/PacketTracer_731_amd64.deb"
 DIR="/tmp/PacketTracer/"
 if [ -d "$DIR" ]; then
