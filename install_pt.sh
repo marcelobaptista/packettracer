@@ -3,16 +3,16 @@
 #Baixando e desempacotando o arquivo .deb
 #
 echo ""
-echo "Downloading: PacketTracer_731_amd64.deb..." && curl --progress-bar --remote-name --location "http://cs3.calstatela.edu/~egean/cs4471/software/Cisco%20Packet%20Tracer%207.3.1/PacketTracer_731_amd64.deb"
+echo "Downloading: PacketTracer_800_amd64_build212_final.deb..." && curl --progress-bar --remote-name --location "https://archive.org/download/packet-tracer-800-amd-64-build-212-final/PacketTracer_800_amd64_build212_final.deb"
 DIR="/tmp/PacketTracer/"
 if [ -d "$DIR" ]; then
 	rm -rf "$DIR"
 else
 	mkdir /tmp/PacketTracer/
 fi
-cp PacketTracer_731_amd64.deb /tmp/PacketTracer/
+mv PacketTracer_800_amd64_build212_final.deb /tmp/PacketTracer/PacketTracer_800_amd64_build212_final.deb
 cd /tmp/PacketTracer/
-ar -xv PacketTracer_731_amd64.deb
+ar -xv PacketTracer_800_amd64_build212_final.deb
 mkdir control
 tar -C control -Jxf control.tar.xz
 mkdir data
@@ -28,8 +28,8 @@ rm -rf /usr/share/icons/hicolor/48x48/apps/pt7.png
 #
 #Copia arquivos do PacketTracer
 #
-cp -r usr /
-cp -r opt /
+yes | cp -r usr /
+yes | cp -r opt /
 #
 #Link simbólico para uma biblioteca necessária
 #
@@ -37,11 +37,11 @@ ln -s /usr/lib64/libdouble-conversion.so.3.1.5 /usr/lib64/libdouble-conversion.s
 #
 #Atualiza o ícone e a associação de arquivos
 #
-xdg-desktop-menu install /usr/share/applications/cisco-pt7.desktop
-xdg-desktop-menu install /usr/share/applications/cisco-ptsa7.desktop
+xdg-desktop-menu install /usr/share/applications/cisco-pt.desktop
+xdg-desktop-menu install /usr/share/applications/cisco-ptsa.desktop
 update-mime-database /usr/share/mime
 gtk-update-icon-cache --force --ignore-theme-index /usr/share/icons/gnome
-xdg-mime default cisco-ptsa7.desktop x-scheme-handler/pttp
+xdg-mime default cisco-ptsa.desktop x-scheme-handler/pttp
 #
 #Link simbólico para PacketTracer
 #
@@ -50,15 +50,15 @@ ln -sf /opt/pt/packettracer /usr/local/bin/packettracer
 #Configura variáveis de ambiente
 #
 cat << "EOF">> /etc/profile.local
-PT7HOME=/opt/pt
-export PT7HOME
+PTHOME=/opt/pt
+export PTHOME
 QT_DEVICE_PIXEL_RATIO=auto
 export QT_DEVICE_PIXEL_RATIO
 EOF
 #
 #Remove arquivos utilizados durante a instalação
 #
-rm -rf /tmp/PacketTracerInst/
+rm -rf /tmp/PacketTracer
 #
 #Sai do script
 echo ""
