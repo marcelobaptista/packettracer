@@ -3,16 +3,16 @@
 #Baixando e desempacotando o arquivo .deb
 #
 echo ""
-echo "Downloading: PacketTracer_800_amd64_build212_final.deb..." && curl --progress-bar --remote-name --location "https://archive.org/download/packet-tracer-800-amd-64-build-212-final/PacketTracer_800_amd64_build212_final.deb"
+echo "Fazendo o download do arquivo CiscoPacketTracer_801_Ubuntu_64bit.deb..." && curl --progress-bar --remote-name --location "https://archive.org/download/cisco-packet-tracer-801-ubuntu-64bit/CiscoPacketTracer_801_Ubuntu_64bit.deb"
 DIR="/tmp/PacketTracer/"
 if [ -d "$DIR" ]; then
 	rm -rf "$DIR"
 else
 	mkdir /tmp/PacketTracer/
 fi
-mv PacketTracer_800_amd64_build212_final.deb /tmp/PacketTracer/PacketTracer_800_amd64_build212_final.deb
+mv CiscoPacketTracer_801_Ubuntu_64bit.deb /tmp/PacketTracer/CiscoPacketTracer_801_Ubuntu_64bit.deb
 cd /tmp/PacketTracer/
-ar -xv PacketTracer_800_amd64_build212_final.deb
+ar -xv CiscoPacketTracer_801_Ubuntu_64bit.deb
 mkdir control
 tar -C control -Jxf control.tar.xz
 mkdir data
