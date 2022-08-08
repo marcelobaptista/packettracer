@@ -3,18 +3,18 @@
 #Baixando e desempacotando o arquivo .deb
 #
 echo ""
-echo "Fazendo o download do arquivo CiscoPacketTracer_810_Ubuntu_64bit.deb..."
+echo "Fazendo o download do arquivo Cisco_Packet_Tracer_820_Ubuntu_64bit.deb..."
 echo "" && curl --progress-bar \
---remote-name --location "https://archive.org/download/cisco-packet-tracer-810-ubuntu-64bit/CiscoPacketTracer_810_Ubuntu_64bit.deb"
+--remote-name --location "https://archive.org/download/cisco-packet-tracer-820-linux-64bit/Cisco_Packet_Tracer_820_Ubuntu_64bit.deb"
 DIR="/tmp/PacketTracer/"
 if [ -d "$DIR" ]; then
 	rm -rf "$DIR"
 else
 	mkdir /tmp/PacketTracer/
 fi
-mv CiscoPacketTracer_810_Ubuntu_64bit.deb /tmp/PacketTracer/CiscoPacketTracer_810_Ubuntu_64bit.deb
+mv Cisco_Packet_Tracer_820_Ubuntu_64bit.deb /tmp/PacketTracer/Cisco_Packet_Tracer_820_Ubuntu_64bit.deb
 cd /tmp/PacketTracer/
-ar -xv CiscoPacketTracer_810_Ubuntu_64bit.deb
+ar -xv Cisco_Packet_Tracer_820_Ubuntu_64bit.deb
 mkdir control
 tar -C control -Jxf control.tar.xz
 mkdir data
@@ -32,10 +32,6 @@ rm -rf /usr/share/icons/hicolor/48x48/apps/pt7.png
 #
 yes | cp -r usr /
 yes | cp -r opt /
-#
-#Link simbólico para uma biblioteca necessária
-#
-ln -s /usr/lib64/libdouble-conversion.so.3.1.5 /usr/lib64/libdouble-conversion.so.1
 #
 #Atualiza o ícone e a associação de arquivos
 #
@@ -64,7 +60,7 @@ rm -rf /tmp/PacketTracer
 #
 #Sai do script
 echo ""
-echo "Aperte <ENTER> para continuar..."
+echo "Instalado com sucesso!!! Aperte <ENTER> para continuar..."
 echo ""
 read
 echo "Bye!Bye!"
