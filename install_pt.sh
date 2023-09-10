@@ -1,8 +1,16 @@
 #!/bin/bash
 
+# carregar localidades
+# load locales
+LOCALE=$(locale | grep LANG=)
+
 # Verificando o UID do usuário que executou o script
 if [ $UID -ne 0 ]; then
-	echo "Requer privilégio de root. Execute o script com 'sudo' "
+	if [[ $LOCALE == "LANG=pt_PT.UTF-8" || $LOCALE == "LANG=pt_BR.UTF-8" ]]; then
+        echo "Requer privilégio de root. Execute o script com 'sudo' "
+    else
+        echo "Requires root privilege. Run the script with 'sudo' "
+    fi
 	exit 1
 fi
 #
@@ -22,7 +30,11 @@ cd /tmp/PacketTracer/
 #Baixando e desempacotando o arquivo .deb
 #
 echo ""
-echo "Fazendo o download do arquivo Cisco_Packet_Tracer_821_Ubuntu_64bit.deb..."
+	if [[ $LOCALE == "LANG=pt_PT.UTF-8" || $LOCALE == "LANG=pt_BR.UTF-8" ]]; then
+		echo "Fazendo o download do arquivo Cisco_Packet_Tracer_821_Ubuntu_64bit.deb..."
+    else
+        echo "Downloading the Cisco_Packet_Tracer_821_Ubuntu_64bit.deb file..."
+    fi
 echo "" && curl --progress-bar \
 	-OL "https://archive.org/download/cisco-packet-tracer-821-ubuntu-64bit_202304/Cisco_Packet_Tracer_821_Ubuntu_64bit.deb"
 #
@@ -89,9 +101,18 @@ chown root:root /opt/pt/bin/updatepttp && chmod 4755 /opt/pt/bin/updatepttp
 cd .. && rm -rf /tmp/PacketTracer
 #
 #Sai do script
-echo ""
-echo "Instalado com sucesso!!!"
-echo ""
-echo "Bye!Bye!"
-echo ""
-echo ""
+	if [[ $LOCALE == "LANG=pt_PT.UTF-8" || $LOCALE == "LANG=pt_BR.UTF-8" ]]; then
+		echo ""
+		echo "Instalado com sucesso!!!"
+		echo ""
+		echo "Bye!Bye!"
+		echo ""
+		echo ""
+    else
+		echo ""
+		echo "Successfully installed!!!"
+		echo ""
+		echo "Bye!Bye!"
+		echo ""
+		echo ""
+    fi
