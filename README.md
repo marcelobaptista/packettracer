@@ -15,7 +15,7 @@ curl -s https://raw.githubusercontent.com/marcelobaptista/packettracer/master/in
 
 ## Script for installing Cisco Packet Tracer 8.2.2  
 
-##### The script was tested on distribution Manjaro Linux, Arch Linux and Fedora, all in the 64-bit version
+##### The script was tested on distribution  Manjaro Linux, Arch Linux and Fedora, all in the 64-bit version
 
 #### System Requirements:
 
