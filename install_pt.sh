@@ -5,7 +5,6 @@
 if [[ $LANG == "pt_PT.UTF-8" || $LANG == "pt_BR.UTF-8" ]]; then
     # Mensagens em português
     requires_root="Requer privilégio de root. Execute o script com 'sudo' "
-    downloading_file="Fazendo o download do arquivo "
     extracting_files="Extraindo os arquivos..."
     copying_files="Copiando os arquivos..."
     creating_shortcuts="Criando atalhos..."
@@ -14,10 +13,10 @@ if [[ $LANG == "pt_PT.UTF-8" || $LANG == "pt_BR.UTF-8" ]]; then
     fixing_permissions="Corrigindo permissões..."
     removing_temp_files="Removendo arquivos temporários..."
     installation_complete="Instalação concluída com sucesso!"
+    error_copying_file="Erro ao copiar o arquivo"
 else
     # English messages
     requires_root="Requires root privileges. Run the script with 'sudo' "
-    downloading_file="Downloading file "
     extracting_files="Extracting files..."
     copying_files="Copying files..."
     creating_shortcuts="Creating shortcuts..."
@@ -26,6 +25,7 @@ else
     fixing_permissions="Fixing permissions..."
     removing_temp_files="Removing temporary files..."
     installation_complete="Installation completed successfully!"
+    error_copying_file="Error copying file"
 fi
 
 # Verificando o UID do usuário que executou o script
@@ -38,8 +38,7 @@ fi
 # Diretório temporário usado na instalação
 # Temporary directory used during installation
 temp_dir="/tmp/PacketTracer/"
-arquivo="Packet_Tracer822_amd64_signed.deb"
-url="https://archive.org/download/packet-tracer-822-amd-64"
+arquivo="./Packet_Tracer822_amd64_signed.deb"
 
 # Checa se já existe o diretório /tmp/PacketTracer/ e acessa o mesmo
 # Check if the /tmp/PacketTracer/ directory exists and access it
@@ -47,28 +46,24 @@ if [ -d "${temp_dir}" ]; then
     rm -rf "${temp_dir}"
 fi
 
-# Cria o diretório temporário
-# Create the temporary directory
+# Copia o arquivo .deb para o diretório temporário
+# Copy the .deb file to the temporary directory
 mkdir -p "${temp_dir}"
+cp -f "${arquivo}" "${temp_dir}" || {
+    printf "\n%s\n" "${error_copying_file} ${arquivo}!"
+    exit 1
+}
 cd "${temp_dir}" || exit 1
 
 # Trata os erros de download
 # Handle download errors
 trap 'rm -rf "${temp_dir}"' ERR
 
-# Baixa o arquivo .deb do Cisco Packet Tracer
-# Download the .deb file of Cisco Packet Tracer
-printf "\n%s%s\n" "${downloading_file}" "${arquivo}..."
-curl --progress-bar -OL "${url}/${arquivo}" || {
-    echo "Erro ao baixar o arquivo ${arquivo}!"
-    exit 1
-}
-
 # Extrai os arquivos do .deb
 # Extract files from the .deb
 printf "\n%s\n" "${extracting_files}"
 ar -xv "${arquivo}" > /dev/null 2>&1
-mkdir data && tar -C data -Jxf data.tar.xz
+mkdir ./data && tar -C data -Jxf data.tar.xz
 cd data || exit 1
 
 # Remove a instalação anterior do PacketTracer (normalmente instalado em /opt/pt)

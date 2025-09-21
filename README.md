@@ -11,6 +11,7 @@ Para instalação automática, execute no terminal:
 ```sh
 curl -s https://raw.githubusercontent.com/marcelobaptista/packettracer/master/install_pt.sh | sudo bash
 ```
+
 ***************************************************************************************************
 
 ## Script for installing Cisco Packet Tracer 8.2.2  
